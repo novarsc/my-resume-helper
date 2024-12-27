@@ -1,0 +1,526 @@
+
+/* 캘린더 스타일 */
+input {
+  border: 4px solid #ccc;
+  border-radius: 4px;
+  padding: 10px;
+  width: 100%;
+  font-size: 16px;
+}
+
+.calendar {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  padding: 20px;
+  background-color: #f9f9f9; /* 전체 배경 */
+  border-radius: 12px; /* 둥근 모서리 */
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); /* 외곽 그림자 */
+}
+
+.calendar-controls {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-family: 'Inter', sans-serif;
+}
+
+.calendar-controls button {
+  background-color: #007bff;
+  color: white;
+  border: none;
+  padding: 8px 16px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: 500;
+  transition: background-color 0.3s ease;
+}
+
+.calendar-controls button:hover {
+  background-color: #0056b3;
+}
+
+.calendar-controls span {
+  font-weight: bold;
+  font-size: 1.2rem;
+  color: #333;
+}
+
+.calendar-header {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  text-align: center;
+  font-weight: bold;
+  padding: 10px 0;
+  background-color: #eef3ff;
+  border-radius: 8px;
+  color: #333;
+}
+
+.calendar-body {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 10px;
+}
+
+.calendar-cell {
+  border: 1px solid #ddd;
+  padding: 12px;
+  text-align: center;
+  border-radius: 8px;
+  position: relative;
+  background-color: #ffffff;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+}
+
+.calendar-cell.today {
+  background-color: #ffefc3; /* 오늘 날짜 강조 */
+  border-color: #ffc107;
+  font-weight: bold;
+}
+
+.calendar-cell.empty .empty-cell {
+  color: #d1d1d1;
+  font-size: 0.9rem;
+}
+
+.calendar-cell:hover {
+  background-color: #f4faff;
+  transform: scale(1.05); /* 셀 크기 확대 */
+}
+
+.calendar-cell.today:hover {
+  background-color: #ffefc3; /* 오늘 날짜 강조 */
+  border-color: #ffc107;
+  font-weight: bold;
+}
+.date {
+  font-weight: bold;
+  margin-bottom: 5px;
+  font-size: 1rem;
+}
+
+.company-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.company-item {
+  display: flex; /* 가로 정렬 */
+  align-items: center; /* 세로 가운데 정렬 */
+  justify-content: space-between; /* 기업명과 별표를 양쪽 끝에 배치 */
+  margin: 5px 0;
+  padding: 5px;
+  border-bottom: 1px solid #ddd; /* 구분선 */
+}
+
+.company-name {
+  font-weight: bold;
+  font-size: 0.95rem;
+  color: black;
+  cursor: pointer;
+  flex-grow: 1; /* 기업명이 왼쪽으로 정렬되도록 공간 차지 */
+}
+
+.company-name:hover {
+  text-decoration: underline; /* 밑줄 추가 */
+  color: #0056b3; /* 강조 색상 */
+}
+
+.favorite-btn {
+  font-size: 1.2rem;
+  color: silver;
+  background: none;
+  border: none;
+  cursor: pointer;
+  transition: color 0.3s ease;
+}
+
+.favorite-btn.active {
+  color: #ec6253f1; /* 활성화된 별표 색상 */
+}
+
+.favorite-btn:hover {
+  color: #ec6253f1; /* 호버 시 별표 색상 */
+}
+
+.suggestions {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  background-color: white;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  max-height: 150px;
+  overflow-y: auto;
+  position: absolute;
+  width: 100%;
+  z-index: 1000;
+}
+
+.suggestions li {
+  padding: 8px 10px;
+  cursor: pointer;
+}
+
+.suggestions li:hover {
+  background-color: #f0f0f0;
+}
+
+
+/* 모바일용 반응형 스타일 */
+@media (max-width: 768px) {
+  input {
+    border: 4px solid #ccc;
+    border-radius: 4px;
+    padding: 10px;
+    width: 100%;
+    max-width: 350px;
+    font-size: 16px;
+  }
+  
+  .calendar {
+    padding: 10px;
+    gap: 15px;
+  }
+
+  .calendar-controls {
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .calendar-controls button {
+    width: 100%; /* 버튼 가로 길이를 화면에 맞춤 */
+  }
+
+  .calendar-header {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    font-size: 0.8rem;
+    background-color: #f4f4f4;
+  }
+
+  .calendar-body {
+    grid-template-columns: repeat(1, 1fr); /* 한 줄에 한 날짜씩 표시 */
+  }
+
+  .calendar-cell {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 10px;
+    border: 1px solid #ddd;
+    background-color: #ffffff;
+    font-size: 0.9rem;
+    text-align: left;
+  }
+
+  .calendar-cell .date {
+    font-weight: bold;
+    font-size: 1.1rem;
+    margin-bottom: 5px;
+  }
+
+  .company-list {
+    margin-top: 5px;
+  }
+
+  .company-list li {
+    font-size: 0.9rem;
+    margin-bottom: 4px;
+  }
+
+  /* 빈 날짜 */
+  .calendar-cell.empty {
+    display: none; /* 모바일에서는 빈 날짜를 숨김 */
+  }
+
+  .suggestions {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    background-color: white;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    max-height: 150px;
+    overflow-y: auto;
+    position: absolute;
+    width: 100%;
+    z-index: 1000;
+  }
+  
+  .suggestions li {
+    padding: 8px 10px;
+    cursor: pointer;
+  }
+  
+  .suggestions li:hover {
+    background-color: #f0f0f0;
+  }
+  
+}
+
+/* 캘린더 스타일 */
+input {
+  border: 4px solid #ccc;
+  border-radius: 4px;
+  padding: 10px;
+  width: 100%;
+  font-size: 16px;
+}
+
+.calendar {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  padding: 20px;
+  background-color: #f9f9f9; /* 전체 배경 */
+  border-radius: 12px; /* 둥근 모서리 */
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); /* 외곽 그림자 */
+}
+
+.calendar-controls {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-family: 'Inter', sans-serif;
+}
+
+.calendar-controls button {
+  background-color: #007bff;
+  color: white;
+  border: none;
+  padding: 8px 16px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: 500;
+  transition: background-color 0.3s ease;
+}
+
+.calendar-controls button:hover {
+  background-color: #0056b3;
+}
+
+.calendar-controls span {
+  font-weight: bold;
+  font-size: 1.2rem;
+  color: #333;
+}
+
+.calendar-header {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  text-align: center;
+  font-weight: bold;
+  padding: 10px 0;
+  background-color: #eef3ff;
+  border-radius: 8px;
+  color: #333;
+}
+
+.calendar-body {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 10px;
+}
+
+.calendar-cell {
+  border: 1px solid #ddd;
+  padding: 12px;
+  text-align: center;
+  border-radius: 8px;
+  position: relative;
+  background-color: #ffffff;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+}
+
+.calendar-cell.today {
+  background-color: #ffefc3; /* 오늘 날짜 강조 */
+  border-color: #ffc107;
+  font-weight: bold;
+}
+
+.calendar-cell.empty .empty-cell {
+  color: #d1d1d1;
+  font-size: 0.9rem;
+}
+
+.calendar-cell:hover {
+  background-color: #f4faff;
+  transform: scale(1.05); /* 셀 크기 확대 */
+}
+
+.calendar-cell.today:hover {
+  background-color: #ffefc3; /* 오늘 날짜 강조 */
+  border-color: #ffc107;
+  font-weight: bold;
+}
+.date {
+  font-weight: bold;
+  margin-bottom: 5px;
+  font-size: 1rem;
+}
+
+.company-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.company-item {
+  display: flex; /* 가로 정렬 */
+  align-items: center; /* 세로 가운데 정렬 */
+  justify-content: space-between; /* 기업명과 별표를 양쪽 끝에 배치 */
+  margin: 5px 0;
+  padding: 5px;
+  border-bottom: 1px solid #ddd; /* 구분선 */
+}
+
+.company-name {
+  font-weight: bold;
+  font-size: 0.95rem;
+  color: black;
+  cursor: pointer;
+  flex-grow: 1; /* 기업명이 왼쪽으로 정렬되도록 공간 차지 */
+}
+
+.company-name:hover {
+  text-decoration: underline; /* 밑줄 추가 */
+  color: #0056b3; /* 강조 색상 */
+}
+
+.favorite-btn {
+  font-size: 1.2rem;
+  color: silver;
+  background: none;
+  border: none;
+  cursor: pointer;
+  transition: color 0.3s ease;
+}
+
+.favorite-btn.active {
+  color: #ec6253f1; /* 활성화된 별표 색상 */
+}
+
+.favorite-btn:hover {
+  color: #ec6253f1; /* 호버 시 별표 색상 */
+}
+
+.suggestions {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  background-color: white;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  max-height: 150px;
+  overflow-y: auto;
+  position: absolute;
+  width: 100%;
+  z-index: 1000;
+}
+
+.suggestions li {
+  padding: 8px 10px;
+  cursor: pointer;
+}
+
+.suggestions li:hover {
+  background-color: #f0f0f0;
+}
+
+
+/* 모바일용 반응형 스타일 */
+@media (max-width: 768px) {
+  input {
+    border: 4px solid #ccc;
+    border-radius: 4px;
+    padding: 10px;
+    width: 100%;
+    max-width: 350px;
+    font-size: 16px;
+  }
+  
+  .calendar {
+    padding: 10px;
+    gap: 15px;
+  }
+
+  .calendar-controls {
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .calendar-controls button {
+    width: 100%; /* 버튼 가로 길이를 화면에 맞춤 */
+  }
+
+  .calendar-header {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    font-size: 0.8rem;
+    background-color: #f4f4f4;
+  }
+
+  .calendar-body {
+    grid-template-columns: repeat(1, 1fr); /* 한 줄에 한 날짜씩 표시 */
+  }
+
+  .calendar-cell {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 10px;
+    border: 1px solid #ddd;
+    background-color: #ffffff;
+    font-size: 0.9rem;
+    text-align: left;
+  }
+
+  .calendar-cell .date {
+    font-weight: bold;
+    font-size: 1.1rem;
+    margin-bottom: 5px;
+  }
+
+  .company-list {
+    margin-top: 5px;
+  }
+
+  .company-list li {
+    font-size: 0.9rem;
+    margin-bottom: 4px;
+  }
+
+  /* 빈 날짜 */
+  .calendar-cell.empty {
+    display: none; /* 모바일에서는 빈 날짜를 숨김 */
+  }
+
+  .suggestions {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    background-color: white;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    max-height: 150px;
+    overflow-y: auto;
+    position: absolute;
+    width: 100%;
+    z-index: 1000;
+  }
+  
+  .suggestions li {
+    padding: 8px 10px;
+    cursor: pointer;
+  }
+  
+  .suggestions li:hover {
+    background-color: #f0f0f0;
+  }
+  
+}
